@@ -1,0 +1,23 @@
+<mujoco model="peg_in_hole">
+  <compiler angle="degree" inertiafromgeom="true" coordinate="local"/>
+  <option timestep="0.001" gravity="0 0 -9.81"/>
+  <default>
+    <geom contype="1" conaffinity="1" solref="0.002 1" solimp="0.95 0.99 0.001" friction="0.8 0.1 0.1"/>
+    <joint damping="0.02"/>
+  </default>
+
+  <worldbody>
+    <body name="peg_body" pos="0 0 0.1">
+      <joint name="slide_z" type="slide" axis="0 0 1" range="0 0.12"/>
+      <geom name="peg_geom" type="cylinder" size="0.005 0.05" fromto="0 0 0 0 0 -0.1" rgba="0.2 0.6 1 1" density="500"/>
+      <site name="peg_tip" pos="0 0 -0.1" size="0.003" rgba="1 0 0 1"/>
+    </body>
+    <body name="hole_body" pos="0 0 0">
+      <geom name="hole_geom" type="cylinder" size="0.006 0.05" fromto="0 0 0 0 0 -0.1" rgba="0.7 0.7 0.7 1" contype="0" conaffinity="0"/>
+    </body>
+  </worldbody>
+
+  <actuator>
+    <motor name="slide_motor" joint="slide_z" ctrlrange="-1 1" gear="1"/>
+  </actuator>
+</mujoco>
